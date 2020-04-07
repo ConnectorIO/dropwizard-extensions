@@ -1,0 +1,91 @@
+# Nimbus Auth JWT for Dropwizard
+
+This module provides very basic implementation of `Authorization` header parsing and validation based on Nimbus JOSE+JWT
+library.
+
+## Usage
+
+First of all, secure the input with JAX-RS filter:
+```java
+
+  public void run() {
+    // the JWKS_URI is shipped via service configuration
+    NimbusJwtFilter<MyAppJwtPrincipal> filter = new NimbusJwtFilter.Builder<MyAppJwtPrincipal>()
+      .setAuthenticator(new DefaultJwtAuthenticator<>(new MyAppAuthenticator(), configuration.getJwksUri(), JWSAlgorithm.RS256))
+      .setAuthorizer(new StructureAuthorizer())
+      .buildAuthFilter();
+
+    environment.jersey().register(new AuthValueFactoryProvider.Binder<>(MyAppJwtPrincipal.class));
+    environment.jersey().register(filter);
+  }
+
+
+```
+
+Authorization logic which controls access to resources, here you can do more fine grained access control based on user
+role and call context.
+```java
+public class MyAppAuthenticator implements Authorizer<MyAppJwtPrincipal> {
+
+  @Override // deprecated, this method is not called with standard request cycle
+  public boolean authorize(MyAppJwtPrincipal principal, String role) {
+    return false;
+  }
+
+  @Override
+  public boolean authorize(MyAppJwtPrincipal principal, String role, @Nullable ContainerRequestContext requestContext) {
+    if (requestContext == null) {
+      return false;
+    }
+    // verify principal against required role
+
+    return true;
+  }
+}
+```
+
+Provide authenticator, meaning logic which is executed after token is validated to transform token into structure valid
+for your use case.
+```
+public class MyAppAuthenticator implements JwtClaimsSetAuthenticator<MyAppJwtPrincipal> {
+
+  @Override
+  public Optional<MyAppJwtPrincipal> authenticate(JWTClaimsSet credentials) throws AuthenticationException {
+    return Optional.of(new MyAppJwtPrincipal(credentials));
+  }
+}
+```
+
+Provide own principal implementation which can be injected into services:
+```
+public class MyAppJwtPrincipal extends JwtClaimsSetPrincipal {
+  public MyAppJwtPrincipal(JWTClaimsSet claimsSet) {
+    super(claimsSet);
+  }
+
+  public MyAppJwtPrincipal(JwtClaimsSetPrincipal principal) {
+    super(principal.claimsSet);
+  }
+
+  public final Optional<String> getUserId() {
+    try {
+      return Optional.ofNullable(claimsSet.getStringClaim("userId"));
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    return Optional.empty();
+  }
+
+}
+```
+
+Finally, inject token (user/principal) context into your resources:
+```java
+
+  @GET
+  public String root(@Auth MyAppJwtPrincipal user) {
+    // do something with user
+    return user.getUserId().orElse("<?unknown?>");
+  }
+
+```

@@ -1,0 +1,4 @@
+# ConnectorIO Dropwizard
+
+This repository contains set of useful utilities which we extracted from our code while playing with Dropwizard.
+Initial versions, nothing serious.
