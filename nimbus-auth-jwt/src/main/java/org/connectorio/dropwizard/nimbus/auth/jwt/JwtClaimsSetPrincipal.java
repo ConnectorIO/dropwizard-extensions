@@ -42,4 +42,7 @@ public class JwtClaimsSetPrincipal implements Principal {
     return claimsSet.getSubject();
   }
 
+  public JWTClaimsSet getClaimsSet() {
+    return claimsSet;
+  }
 }
