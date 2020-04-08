@@ -16,11 +16,13 @@
 package org.connectorio.dropwizard.nimbus.auth.jwt;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.text.ParseException;
 import javax.annotation.Nullable;
+import javax.annotation.Priority;
+import javax.ws.rs.Priorities;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.HttpHeaders;
 import com.nimbusds.jwt.JWT;
 import com.nimbusds.jwt.JWTParser;
@@ -33,9 +35,11 @@ import io.dropwizard.auth.Authenticator;
  *
  * @author Łukasz Dywicki
  *
- * @param <T>
+ * @param <T> Type of principal.
  */
-public class NimbusJwtFilter<T extends Principal> extends AuthFilter<JWT, T> {
+@Priority(Priorities.AUTHENTICATION)
+@PreMatching // FIXME let filter work with sub-resources
+public class NimbusJwtFilter<T extends JwtClaimsSetPrincipal> extends AuthFilter<JWT, T> {
 
   private static final String DEFAULT_AUTH_SCHEME = "Bearer";
 
