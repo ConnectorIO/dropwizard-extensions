@@ -18,6 +18,7 @@ package org.connectorio.dropwizard.nimbus.auth.jwt;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
+import org.connectorio.dropwizard.nimbus.auth.jwt.config.JwtConfiguration;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.source.RemoteJWKSet;
@@ -54,8 +55,8 @@ public class DefaultJwtAuthenticator<P extends JwtClaimsSetPrincipal> implements
   private final JWSVerificationKeySelector<SecurityContext> jwsKeySelector;
   private final DefaultJWTProcessor<SecurityContext> processor;
 
-  public DefaultJwtAuthenticator(JwtClaimsSetAuthenticator<P> delegate, String jwkSetUrl, String signatureAlgorithm) {
-    this(delegate, jwkSetUrl, JWSAlgorithm.parse(signatureAlgorithm));
+  public DefaultJwtAuthenticator(JwtClaimsSetAuthenticator<P> delegate, JwtConfiguration configuration) {
+    this(delegate, configuration.getUri(), JWSAlgorithm.parse(configuration.getSignatureAlgorithm()));
   }
 
   public DefaultJwtAuthenticator(JwtClaimsSetAuthenticator<P> delegate, String jwkSetUrl, JWSAlgorithm signatureAlgorithm) {
