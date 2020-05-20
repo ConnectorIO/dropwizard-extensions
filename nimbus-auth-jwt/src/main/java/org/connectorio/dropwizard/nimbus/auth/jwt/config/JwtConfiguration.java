@@ -16,6 +16,7 @@
 package org.connectorio.dropwizard.nimbus.auth.jwt.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.validation.constraints.NotNull;
 
 /**
  * Configuration of token processing.
@@ -24,9 +25,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class JwtConfiguration {
 
+    @NotNull
     @JsonProperty("uri")
     private String uri;
 
+    @NotNull
     @JsonProperty("signatureAlgorithm")
     private String signatureAlgorithm;
 
