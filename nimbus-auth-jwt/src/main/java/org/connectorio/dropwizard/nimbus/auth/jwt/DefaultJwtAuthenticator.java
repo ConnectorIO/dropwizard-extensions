@@ -34,6 +34,8 @@ import com.nimbusds.jwt.proc.DefaultJWTProcessor;
 
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Default implementation of {@link Authenticator} which handles a most repeatable part, namely token validation against
@@ -49,6 +51,7 @@ import io.dropwizard.auth.Authenticator;
  */
 public class DefaultJwtAuthenticator<P extends JwtClaimsSetPrincipal> implements Authenticator<JWT, P> {
 
+  private final Logger logger = LoggerFactory.getLogger(DefaultJwtAuthenticator.class);
   private final JwtClaimsSetAuthenticator<P> delegate;
   private final URL jwkSetUrl;
   private final RemoteJWKSet<SecurityContext> jwkSource;
@@ -61,14 +64,6 @@ public class DefaultJwtAuthenticator<P extends JwtClaimsSetPrincipal> implements
 
   public DefaultJwtAuthenticator(JwtClaimsSetAuthenticator<P> delegate, String jwkSetUrl, JWSAlgorithm signatureAlgorithm) {
     this(delegate, url(jwkSetUrl), signatureAlgorithm);
-  }
-
-  private static URL url(String url) {
-    try {
-      return new URL(url);
-    } catch (MalformedURLException e) {
-      throw new RuntimeException("Could not parse JWK URL", e);
-    }
   }
 
   public DefaultJwtAuthenticator(JwtClaimsSetAuthenticator<P> delegate, URL jwkSetUrl, JWSAlgorithm signatureAlgorithm) {
@@ -93,12 +88,20 @@ public class DefaultJwtAuthenticator<P extends JwtClaimsSetPrincipal> implements
       JWTClaimsSet process = processor.process(credentials, null);
       return delegate.authenticate(process);
     } catch (BadJOSEException e) {
-      e.printStackTrace();
+      logger.error("Token validation failed", e);
     } catch (JOSEException e) {
-      e.printStackTrace();
+      logger.error("Signature check failed", e);
     }
 
     return Optional.empty();
+  }
+
+  private static URL url(String url) {
+    try {
+      return new URL(url);
+    } catch (MalformedURLException e) {
+      throw new RuntimeException("Could not parse JWK URL", e);
+    }
   }
 
 }
