@@ -1,0 +1,9 @@
+# Camel for Dropwizard
+
+This module provides very basic integration of http://camel.apache.org[Apache Camel] and Dropwizard.
+Key point is integration of Camel lifecycle with Dropwizard.
+Present version of this integration does not handle any complex scenarios.
+
+## Usage
+
+TODO ;-)

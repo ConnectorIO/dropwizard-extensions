@@ -32,37 +32,123 @@
   <description>Parent for ConnectorIO supplied dropwizard extensions.</description>
 
   <properties>
+    <camel.version>3.2.0</camel.version>
     <dropwizard.version>2.0.6</dropwizard.version>
+    <dropwizard-zipkin.version>2.0.0-1</dropwizard-zipkin.version>
+    <brave.version>5.12.3</brave.version>
     <nimbus-jose-jwt.version>8.12</nimbus-jose-jwt.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <!-- supplied artifacts -->
       <dependency>
         <groupId>org.connectorio.dropwizard</groupId>
         <artifactId>nimbus-auth-jwt</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.connectorio.dropwizard</groupId>
+        <artifactId>camel</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
+      <dependency>
+        <groupId>org.connectorio.dropwizard.autobundle</groupId>
+        <artifactId>client-jersey</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.connectorio.dropwizard.autobundle</groupId>
+        <artifactId>core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.connectorio.dropwizard.autobundle</groupId>
+        <artifactId>datasource</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.connectorio.dropwizard.autobundle</groupId>
+        <artifactId>jwt</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.connectorio.dropwizard.autobundle</groupId>
+        <artifactId>migrations</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.connectorio.dropwizard.autobundle</groupId>
+        <artifactId>tracing-datasource</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.connectorio.dropwizard.autobundle</groupId>
+        <artifactId>tracing-client-jersey</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.connectorio.dropwizard.autobundle</groupId>
+        <artifactId>tracing-server-jersey</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.connectorio.dropwizard.autobundle</groupId>
+        <artifactId>tracing-server-servlet</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.connectorio.dropwizard.autobundle</groupId>
+        <artifactId>tracing-zipkin</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <!-- Actual dependencies -->
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-core</artifactId>
+        <version>${camel.version}</version>
+      </dependency>
       <dependency>
         <groupId>com.nimbusds</groupId>
         <artifactId>nimbus-jose-jwt</artifactId>
         <version>${nimbus-jose-jwt.version}</version>
       </dependency>
 
+      <!-- Imports -->
       <dependency>
-          <groupId>io.dropwizard</groupId>
-          <artifactId>dropwizard-dependencies</artifactId>
-          <version>${dropwizard.version}</version>
-          <type>pom</type>
-          <scope>import</scope>
+        <groupId>io.dropwizard</groupId>
+        <artifactId>dropwizard-dependencies</artifactId>
+        <version>${dropwizard.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
       <dependency>
-          <groupId>io.dropwizard</groupId>
-          <artifactId>dropwizard-bom</artifactId>
-          <version>${dropwizard.version}</version>
-          <type>pom</type>
-          <scope>import</scope>
+        <groupId>io.dropwizard</groupId>
+        <artifactId>dropwizard-bom</artifactId>
+        <version>${dropwizard.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>io.zipkin.brave</groupId>
+        <artifactId>brave-bom</artifactId>
+        <version>${brave.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.smoketurner.dropwizard</groupId>
+        <artifactId>zipkin-core</artifactId>
+        <version>${dropwizard-zipkin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.smoketurner.dropwizard</groupId>
+        <artifactId>zipkin-client</artifactId>
+        <version>${dropwizard-zipkin.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

@@ -15,6 +15,7 @@
  */
 package org.connectorio.dropwizard.nimbus.auth.jwt;
 
+import java.util.Objects;
 import java.util.function.Function;
 import org.connectorio.dropwizard.nimbus.auth.jwt.config.JwtConfiguration;
 import org.connectorio.dropwizard.nimbus.auth.jwt.config.TokenConfiguration;
@@ -29,26 +30,26 @@ import io.dropwizard.setup.Environment;
  * @author Łukasz Dywicki
  *
  * @param <C> Type of configuration.
- * @param <J> Type of token configuration.
+ * @param <T> Type of token configuration.
  */
-public class NimbusJwtBundle<C extends Configuration, J extends TokenConfiguration> implements ConfiguredBundle<C> {
+public class NimbusJwtBundle<C extends Configuration, T extends TokenConfiguration> implements ConfiguredBundle<C> {
 
-    private final Function<C, J> extractor;
-    private JwtConfiguration jwtConfig;
+  private final Function<C, T> extractor;
+  private JwtConfiguration jwtConfig;
 
-    public NimbusJwtBundle(Function<C, J> extractor) {
-        this.extractor = extractor;
-    }
+  public NimbusJwtBundle(Function<C, T> extractor) {
+    this.extractor = extractor;
+  }
 
-    @Override
-    public void run(C configuration, Environment environment) throws Exception {
-        J tokenConfig = extractor.apply(configuration);
+  @Override
+  public void run(C configuration, Environment environment) throws Exception {
+    T tokenConfig = Objects.requireNonNull(extractor.apply(configuration));
 
-        jwtConfig = tokenConfig.getJwtConfiguration();
-    }
+    jwtConfig = tokenConfig.getJwtConfiguration();
+  }
 
-    public JwtConfiguration getJwtConfig() {
-        return jwtConfig;
-    }
+  public JwtConfiguration getJwtConfig() {
+    return jwtConfig;
+  }
 
 }

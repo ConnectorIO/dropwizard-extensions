@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.connectorio.dropwizard</groupId>
+    <artifactId>parent</artifactId>
+    <version>2.0.6-SNAPSHOT</version>
+    <relativePath>../parent</relativePath>
+  </parent>
+
+  <artifactId>autobundle</artifactId>
+  <packaging>pom</packaging>
+
+  <name>Connectorio | Dropwizard | Autobundle</name>
+  <description>Support for semi-automatic configuration of dropwizard services.</description>
+
+  <modules>
+    <module>core</module>
+    <module>datasource</module>
+    <module>jwt</module>
+    <module>migrations</module>
+    <module>client-jersey</module>
+    <module>tracing-client-jersey</module>
+    <module>tracing-datasource</module>
+    <module>tracing-server-jersey</module>
+    <module>tracing-server-servlet</module>
+    <module>tracing-zipkin</module>
+  </modules>
+
+</project>

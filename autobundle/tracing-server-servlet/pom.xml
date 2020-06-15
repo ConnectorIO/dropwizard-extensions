@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.connectorio.dropwizard</groupId>
+    <artifactId>autobundle</artifactId>
+    <version>2.0.6-SNAPSHOT</version>
+  </parent>
+
+  <groupId>org.connectorio.dropwizard.autobundle</groupId>
+  <artifactId>tracing-server-servlet</artifactId>
+
+  <name>Connectorio | Dropwizard | Autobundle | Tracing | Server | Servlet</name>
+  <description>Tracing of servlet requests.</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.connectorio.dropwizard.autobundle</groupId>
+      <artifactId>tracing-zipkin</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.zipkin.brave</groupId>
+      <artifactId>brave-instrumentation-servlet</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>

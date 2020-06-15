@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.connectorio.dropwizard</groupId>
+    <artifactId>autobundle</artifactId>
+    <version>2.0.6-SNAPSHOT</version>
+  </parent>
+
+  <groupId>org.connectorio.dropwizard.autobundle</groupId>
+  <artifactId>tracing-datasource</artifactId>
+
+  <name>Connectorio | Dropwizard | Autobundle | Tracing | Datasource</name>
+  <description>Support for database connection tracking.</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.connectorio.dropwizard.autobundle</groupId>
+      <artifactId>datasource</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.connectorio.dropwizard.autobundle</groupId>
+      <artifactId>tracing-zipkin</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard</groupId>
+      <artifactId>dropwizard-db</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.opentracing.contrib</groupId>
+      <artifactId>opentracing-jdbc</artifactId>
+      <version>0.2.10</version>
+    </dependency>
+    <dependency>
+      <groupId>io.opentracing.brave</groupId>
+      <artifactId>brave-opentracing</artifactId>
+      <version>0.37.2</version>
+    </dependency>
+  </dependencies>
+
+</project>
