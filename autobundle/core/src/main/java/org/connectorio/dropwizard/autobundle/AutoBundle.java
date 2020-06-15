@@ -53,6 +53,7 @@ public class AutoBundle<T extends Configuration> implements ConfiguredBundle<T> 
   public void run(T configuration, Environment environment) throws Exception {
     List<BundleNode<T>> startOrder = dependencyMap.sort();
     for (BundleNode<T> bundleNode : startOrder) {
+      logger.debug("Starting bundle {}", bundleNode.getType().getName());
       bundleNode.get().run(configuration, environment, bundleMap);
     }
   }
