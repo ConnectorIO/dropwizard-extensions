@@ -23,11 +23,12 @@ import io.dropwizard.setup.Environment;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ServiceLoader;
+import java.util.stream.Collectors;
 import org.connectorio.dropwizard.autobundle.graph.BundleNode;
 import org.connectorio.dropwizard.autobundle.graph.DependencyGraph;
-import org.connectorio.dropwizard.autobundle.graph.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,7 +52,36 @@ public class AutoBundle<T extends Configuration> implements ConfiguredBundle<T> 
 
   @Override
   public void run(T configuration, Environment environment) throws Exception {
-    List<BundleNode<T>> startOrder = dependencyMap.sort();
+    List<BundleNode<T>> startOrder;
+    if (configuration instanceof AutoBundleConfigurationAware) {
+      AutoBundleConfiguration bundleConfiguration = ((AutoBundleConfigurationAware) configuration).getAutoBundleConfiguration();
+
+      logger.info("Validating provided startup order of bundles.");
+      StringBuilder configDump = new StringBuilder("autoBundles:\n").append("\tstartup:\n");
+
+      startOrder = bundleConfiguration.getStartup().stream()
+        .peek(bundle -> configDump.append("\t\t- ").append(bundle).append("\n"))
+        .map(this::resolveClass)
+        .filter(Optional::isPresent)
+        .map(Optional::get)
+        .map(value -> {
+          BundleNode<T> bundle = dependencyMap.get(value);
+
+          if (bundle == null) {
+            throw new IllegalArgumentException("Bundle " + value + " not found. Configuration is invalid");
+          }
+          return bundle;
+        })
+        .collect(Collectors.toList());
+
+      if (logger.isInfoEnabled()) {
+        logger.info("Startup order of bundles\n{}", configDump);
+      }
+    } else {
+      startOrder= dependencyMap.sort();
+      logger.info("Starting bundles in automatically determined order: {}", startOrder);
+    }
+
     for (BundleNode<T> bundleNode : startOrder) {
       logger.debug("Starting bundle {}", bundleNode.getType().getName());
       bundleNode.get().run(configuration, environment, bundleMap);
@@ -81,6 +111,14 @@ public class AutoBundle<T extends Configuration> implements ConfiguredBundle<T> 
     return Optional.ofNullable(bundleMap.get(bundleType))
       .filter(bundleType::isInstance)
       .map(bundleType::cast);
+  }
+
+  private Optional<Class<?>> resolveClass(String bundle) {
+    try {
+      return Optional.of(Class.forName(bundle, false, getClass().getClassLoader()));
+    } catch (ClassNotFoundException e) {
+      return Optional.empty();
+    }
   }
 
 }
