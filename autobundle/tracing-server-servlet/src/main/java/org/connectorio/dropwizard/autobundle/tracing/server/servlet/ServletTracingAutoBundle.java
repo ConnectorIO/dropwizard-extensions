@@ -33,9 +33,9 @@ import org.slf4j.LoggerFactory;
  *
  * @param <T> Type of configuration.
  */
-public class ServletTracingBundle<T> extends SimpleBundle<T> implements AutomaticBundle<T> {
+public class ServletTracingAutoBundle<T> extends SimpleBundle<T> implements AutomaticBundle<T> {
 
-  private final Logger logger = LoggerFactory.getLogger(ServletTracingBundle.class);
+  private final Logger logger = LoggerFactory.getLogger(ServletTracingAutoBundle.class);
 
   @Override
   public void run(T configuration, Environment environment, Map<Class<?>, AutomaticBundle<T>> bundles) throws Exception {
