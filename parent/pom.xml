@@ -70,6 +70,11 @@
       </dependency>
       <dependency>
         <groupId>org.connectorio.dropwizard.autobundle</groupId>
+        <artifactId>debug-server-jersey</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.connectorio.dropwizard.autobundle</groupId>
         <artifactId>jwt</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -80,12 +85,12 @@
       </dependency>
       <dependency>
         <groupId>org.connectorio.dropwizard.autobundle</groupId>
-        <artifactId>tracing-datasource</artifactId>
+        <artifactId>tracing-client-jersey</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.connectorio.dropwizard.autobundle</groupId>
-        <artifactId>tracing-client-jersey</artifactId>
+        <artifactId>tracing-datasource</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

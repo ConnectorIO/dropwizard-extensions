@@ -1,0 +1,10 @@
+= Jersey Debug AutoBundle
+
+Additional support for one line switch for debugging Jersey managed resources.
+It will be useful when your resources misbehave, or you cannot assemble valid request.
+
+By default, Jersey tracing is set to verbose level with on demand.
+This means that your requests have to append additional headers:
+
+- `X-Jersey-Tracing-Accept: true`
+- `X-Jersey-Tracing-Threshold: VERBOSE`

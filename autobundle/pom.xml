@@ -17,11 +17,12 @@
   <description>Support for semi-automatic configuration of dropwizard services.</description>
 
   <modules>
+    <module>client-jersey</module>
     <module>core</module>
     <module>datasource</module>
+    <module>debug-server-jersey</module>
     <module>jwt</module>
     <module>migrations</module>
-    <module>client-jersey</module>
     <module>tracing-client-jersey</module>
     <module>tracing-datasource</module>
     <module>tracing-server-jersey</module>
