@@ -44,14 +44,8 @@
       <artifactId>dropwizard-db</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.opentracing.contrib</groupId>
-      <artifactId>opentracing-jdbc</artifactId>
-      <version>0.2.10</version>
-    </dependency>
-    <dependency>
-      <groupId>io.opentracing.brave</groupId>
-      <artifactId>brave-opentracing</artifactId>
-      <version>0.37.2</version>
+      <groupId>io.zipkin.brave</groupId>
+      <artifactId>brave-instrumentation-p6spy</artifactId>
     </dependency>
   </dependencies>
 

@@ -16,12 +16,10 @@
 package org.connectorio.dropwizard.autobundle.tracing.datasource;
 
 import brave.http.HttpTracing;
-import brave.opentracing.BraveTracer;
+import com.p6spy.engine.spy.P6SpyDriver;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.setup.Environment;
-import io.opentracing.contrib.jdbc.TracingDriver;
-import io.opentracing.util.GlobalTracer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -46,8 +44,11 @@ public class TracingDatasourceAutoBundle<T extends Configuration> extends Simple
       .flatMap(ZipkinAutoBundle::getHttpTracing);
 
     if (dataSourceFactory.isPresent() && tracing.isPresent()) {
-      GlobalTracer.registerIfAbsent(BraveTracer.create(tracing.get().tracing()));
-      dataSourceFactory.get().setDriverClass(TracingDriver.class.getName());
+      DataSourceFactory dataSourceFactoryInstance = dataSourceFactory.get();
+      if (dataSourceFactoryInstance.getUrl().startsWith("jdbc:p6spy:")) {
+        // automatically override driver class if JDBC uri contains p6spy
+        dataSourceFactoryInstance.setDriverClass(P6SpyDriver.class.getName());
+      }
     }
   }
 
