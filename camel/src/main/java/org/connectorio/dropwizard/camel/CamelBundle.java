@@ -22,7 +22,11 @@ import io.dropwizard.setup.Environment;
 import java.util.Map;
 import java.util.Objects;
 import org.apache.camel.CamelContext;
+import org.apache.camel.component.metrics.messagehistory.MetricsMessageHistoryFactory;
+import org.apache.camel.component.metrics.routepolicy.MetricsRoutePolicyFactory;
+import org.apache.camel.component.metrics.spi.InstrumentedThreadPoolFactory;
 import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.impl.DefaultExecutorServiceManager;
 import org.apache.camel.support.DefaultRegistry;
 import org.connectorio.dropwizard.camel.hk2.MapPropertiesSource;
 import org.connectorio.dropwizard.camel.hk2.MapRepository;
@@ -47,11 +51,17 @@ public abstract class CamelBundle<T extends CamelConfiguration> implements Confi
 
     /* Tracing ... not working yet.
     OpenTracingTracer tracer = new OpenTracingTracer();
+    context.addRoutePolicyFactory(tracer);
+    */
     MetricsRoutePolicyFactory routePolicyFactory = new MetricsRoutePolicyFactory();
     routePolicyFactory.setMetricsRegistry(environment.metrics());
     context.addRoutePolicyFactory(routePolicyFactory);
-    context.addRoutePolicyFactory(tracer);
-   */
+    MetricsMessageHistoryFactory messageHistoryFactory = new MetricsMessageHistoryFactory();
+    messageHistoryFactory.setMetricsRegistry(environment.metrics());
+    context.setMessageHistoryFactory(messageHistoryFactory);
+    //DefaultExecutorServiceManager executorManager = new DefaultExecutorServiceManager(context);
+    //executorManager.setThreadPoolFactory(new InstrumentedThreadPoolFactory(environment.metrics()));
+    //context.setExecutorServiceManager(executorManager);
     //environment.jersey().register(DropwizardInjector.class);
     environment.lifecycle().manage(new CamelDropwizardLifecycle(context));
   }
