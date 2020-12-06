@@ -21,6 +21,7 @@ import io.dropwizard.setup.Environment;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.metrics.messagehistory.MetricsMessageHistoryFactory;
 import org.apache.camel.component.metrics.routepolicy.MetricsRoutePolicyFactory;
@@ -40,11 +41,21 @@ import org.connectorio.dropwizard.camel.hk2.MapRepository;
  */
 public abstract class CamelBundle<T extends CamelConfiguration> implements ConfiguredBundle<T> {
 
+  private final String name;
   private DefaultCamelContext context;
+
+  public CamelBundle() {
+    this(null);
+  }
+
+  public CamelBundle(String name) {
+    this.name = name;
+  }
 
   @Override
   public void run(T configuration, Environment environment) throws Exception {
     context = new DefaultCamelContext();
+    Optional.ofNullable(name).ifPresent(context::setName);
     Map<String, Object> properties = configuration.getProperties();
     context.getPropertiesComponent().addPropertiesSource(new MapPropertiesSource(properties));
     context.setRegistry(new DefaultRegistry(new MapRepository(getBeans(properties))));
