@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.connectorio</groupId>
     <artifactId>dropwizard</artifactId>
-    <version>2.0.6</version>
+    <version>4.0.1-SNAPSHOT</version>
   </parent>
 
   <groupId>org.connectorio.dropwizard</groupId>
