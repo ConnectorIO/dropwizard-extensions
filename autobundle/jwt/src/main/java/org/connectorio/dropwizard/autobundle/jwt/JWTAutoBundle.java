@@ -15,9 +15,9 @@
  */
 package org.connectorio.dropwizard.autobundle.jwt;
 
-import io.dropwizard.Configuration;
+import io.dropwizard.core.Configuration;
 import io.dropwizard.auth.Authorizer;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Environment;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;

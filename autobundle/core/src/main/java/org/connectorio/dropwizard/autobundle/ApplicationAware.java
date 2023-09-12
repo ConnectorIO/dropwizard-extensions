@@ -15,8 +15,8 @@
  */
 package org.connectorio.dropwizard.autobundle;
 
-import io.dropwizard.Application;
-import io.dropwizard.Configuration;
+import io.dropwizard.core.Application;
+import io.dropwizard.core.Configuration;
 
 /**
  * Marker interface for a bundles which are interested in access to application instance while they

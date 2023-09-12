@@ -15,7 +15,7 @@
  */
 package org.connectorio.dropwizard.autobundle.debug.server.jersey;
 
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Environment;
 import java.util.Map;
 import java.util.Optional;
 import org.connectorio.dropwizard.autobundle.AutomaticBundle;

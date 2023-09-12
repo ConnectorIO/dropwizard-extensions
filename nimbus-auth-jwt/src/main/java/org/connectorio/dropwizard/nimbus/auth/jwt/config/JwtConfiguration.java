@@ -16,7 +16,7 @@
 package org.connectorio.dropwizard.nimbus.auth.jwt.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * Configuration of token processing.

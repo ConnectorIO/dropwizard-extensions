@@ -15,15 +15,14 @@
  */
 package org.connectorio.dropwizard.nimbus.auth.jwt;
 
+import jakarta.annotation.Priority;
 import java.io.IOException;
 import java.text.ParseException;
-import javax.annotation.Nullable;
-import javax.annotation.Priority;
-import javax.ws.rs.Priorities;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.PreMatching;
-import javax.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.Priorities;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.container.PreMatching;
+import jakarta.ws.rs.core.HttpHeaders;
 import com.nimbusds.jwt.JWT;
 import com.nimbusds.jwt.JWTParser;
 
@@ -43,7 +42,6 @@ public class NimbusJwtFilter<T extends JwtClaimsSetPrincipal> extends AuthFilter
 
   private static final String DEFAULT_AUTH_SCHEME = "Bearer";
 
-  @Nullable
   private JWT getCredentials(String header) {
     if (header == null) {
       return null;

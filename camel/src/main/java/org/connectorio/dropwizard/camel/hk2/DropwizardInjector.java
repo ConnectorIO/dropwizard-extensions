@@ -15,12 +15,12 @@
  */
 package org.connectorio.dropwizard.camel.hk2;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import org.apache.camel.spi.Injector;
 import org.glassfish.jersey.internal.inject.InjectionManager;
 
 /**
- * Injector which makes sure that {@link javax.inject.Inject} annotations and types gets processed
+ * Injector which makes sure that {@link jakarta.inject.Inject} annotations and types gets processed
  * properly.
  *
  * It is very simple form and rely entirely on Jersey HK2/binders instances.

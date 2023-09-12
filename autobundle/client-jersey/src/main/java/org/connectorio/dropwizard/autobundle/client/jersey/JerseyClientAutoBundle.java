@@ -15,10 +15,10 @@
  */
 package org.connectorio.dropwizard.autobundle.client.jersey;
 
-import io.dropwizard.Configuration;
 import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.client.JerseyClientConfiguration;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.Configuration;
+import io.dropwizard.core.setup.Environment;
 import java.util.Map;
 import java.util.Optional;
 import org.connectorio.dropwizard.autobundle.AutomaticBundle;

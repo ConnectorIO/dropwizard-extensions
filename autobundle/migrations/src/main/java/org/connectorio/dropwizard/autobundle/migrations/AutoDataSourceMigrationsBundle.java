@@ -15,7 +15,7 @@
  */
 package org.connectorio.dropwizard.autobundle.migrations;
 
-import io.dropwizard.Configuration;
+import io.dropwizard.core.Configuration;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.migrations.MigrationsBundle;
 import org.connectorio.dropwizard.autobundle.datasource.DataSourceAwareConfiguration;

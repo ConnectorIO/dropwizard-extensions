@@ -15,9 +15,9 @@
  */
 package org.connectorio.dropwizard.autobundle.datasource;
 
-import io.dropwizard.Configuration;
+import io.dropwizard.core.Configuration;
+import io.dropwizard.core.setup.Environment;
 import io.dropwizard.db.PooledDataSourceFactory;
-import io.dropwizard.setup.Environment;
 import java.util.Map;
 import java.util.Optional;
 import org.connectorio.dropwizard.autobundle.AutomaticBundle;

@@ -17,7 +17,7 @@ package org.connectorio.dropwizard.autobundle.graph;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Environment;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

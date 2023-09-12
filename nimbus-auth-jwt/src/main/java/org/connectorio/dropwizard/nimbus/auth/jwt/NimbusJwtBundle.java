@@ -20,9 +20,9 @@ import java.util.function.Function;
 import org.connectorio.dropwizard.nimbus.auth.jwt.config.JwtConfiguration;
 import org.connectorio.dropwizard.nimbus.auth.jwt.config.TokenConfiguration;
 
-import io.dropwizard.Configuration;
-import io.dropwizard.ConfiguredBundle;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.Configuration;
+import io.dropwizard.core.ConfiguredBundle;
+import io.dropwizard.core.setup.Environment;
 
 /**
  * A basic bundle which allows to group configuration options for token processing in a separate class.

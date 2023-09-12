@@ -38,11 +38,6 @@
     <module>debug-server-jersey</module>
     <module>jwt</module>
     <module>migrations</module>
-    <module>tracing-client-jersey</module>
-    <module>tracing-datasource</module>
-    <module>tracing-server-jersey</module>
-    <module>tracing-server-servlet</module>
-    <module>tracing-zipkin</module>
   </modules>
 
 </project>
