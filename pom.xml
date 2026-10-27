@@ -21,13 +21,13 @@
   <parent>
     <groupId>org.connectorio</groupId>
     <artifactId>connectorio-oss</artifactId>
-    <version>4</version>
+    <version>5</version>
     <relativePath />
   </parent>
 
   <groupId>org.connectorio</groupId>
   <artifactId>dropwizard</artifactId>
-  <version>4.0.1-SNAPSHOT</version>
+  <version>5.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>ConnectorIO | Dropwizard</name>
