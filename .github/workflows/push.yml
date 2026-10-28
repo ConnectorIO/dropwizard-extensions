@@ -1,0 +1,27 @@
+name: Build pushed commit
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    permissions:
+      checks: write
+      contents: read
+    uses: 'connectorio/gh-actions-shared/.github/workflows/maven.yml@master'
+    secrets:
+      MAVEN_SECRETS: >-
+        {
+        "CI_DEPLOY_USERNAME": ${{ toJSON(secrets.CI_DEPLOY_USERNAME) }},
+        "CI_DEPLOY_PASSWORD": ${{ toJSON(secrets.CI_DEPLOY_PASSWORD) }}
+        }
+    with:
+      openhab: false
+      java_version: 17
+      mvn_credentials: |
+        central-snapshots:CI_DEPLOY_USERNAME:CI_DEPLOY_PASSWORD
+      mvn_server_origins: |
+        central-snapshots:https://central.sonatype.com
+      deploy: true
+      skip_test_publish: false
