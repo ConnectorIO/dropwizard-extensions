@@ -47,6 +47,13 @@
     <tag>HEAD</tag>
   </scm>
 
+  <distributionManagement>
+    <snapshotRepository>
+      <id>co7io-internal-snapshots</id>
+      <url>https://repository.connectorio.cloud/co7io-internal-snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>

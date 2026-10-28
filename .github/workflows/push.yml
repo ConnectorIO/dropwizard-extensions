@@ -1,0 +1,23 @@
+name: Build pushed commit
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    permissions:
+      checks: write
+      contents: read
+    uses: 'connectorio/gh-actions-shared/.github/workflows/maven.yml@master'
+    secrets:
+      CI_DEPLOY_USERNAME: ${{ secrets.CI_DEPLOY_USERNAME }}
+      CI_DEPLOY_PASSWORD: ${{ secrets.CI_DEPLOY_PASSWORD }}
+    with:
+      openhab: false
+      master_branch: 'master'
+      java_version: 17
+      server_id: 'co7io-internal-snapshots'
+      deploy: true
+      skip_test_publish: false
+      additional_profiles: 'docker'
